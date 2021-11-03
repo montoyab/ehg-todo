@@ -1,0 +1,9 @@
+<form #itemForm="ngForm" (ngSubmit)="submitValue(itemForm)" class="form-inline">
+    <div class="form-group mb-2">
+      <input class="form-control" name="title" required [(ngModel)]="title" placeholder="Enter todo">
+    </div>
+    <button class="btn btn-primary mb-2" type="submit">
+      Save
+    </button>
+</form>
+  

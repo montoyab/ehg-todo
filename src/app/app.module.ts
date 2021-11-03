@@ -11,7 +11,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 
 import { StoreModule } from '@ngrx/store';
 import { metaReducers, reducers } from './store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
   declarations: [
@@ -32,8 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         strictStateImmutability: true,
         strictActionImmutability: true
       }
-    }),
-    StoreDevtoolsModule.instrument({})
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

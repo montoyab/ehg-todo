@@ -17,6 +17,10 @@ const todoListReducer = createReducer(
   on(TodoListActions.changeCompletedStatus, (state, {id, completed}) => ({
     ...state,
     items: markListElementAsCompleted(state.items, id, completed)
+  })),
+  on(TodoListActions.changeTitle, (state, {id, title}) => ({
+    ...state,
+    items: changeTitle(state.items, id, title)
   }))
 );
 
@@ -33,6 +37,19 @@ function markListElementAsCompleted(list: TodoItem[], id: string, completed: boo
       return {
         ...value,
         completed: completed
+      }
+    } else {
+      return value
+    }
+  })
+}
+
+function changeTitle(list: TodoItem[], id: string, title: string): TodoItem[] {
+  return list.map(value => {
+    if (value._id === id) {
+      return {
+        ...value,
+        title: title
       }
     } else {
       return value

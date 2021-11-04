@@ -4,7 +4,7 @@ import { TodoListService } from '../services/todo-list.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store';
-import { changeCompletedStatus, deleteTodoItem, setNewItem } from 'src/app/store/todo-list/actions';
+import { changeCompletedStatus, deleteTodoItem, setNewItem, changeTitle } from 'src/app/store/todo-list/actions';
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -19,7 +19,6 @@ export class ListManagerComponent implements OnInit {
   constructor(private todoListService: TodoListService, private store: Store<State>) { }
 
   ngOnInit(): void {
-    
     this.todoList = this.todoListService.getTodoList();
   }
 
@@ -36,9 +35,10 @@ export class ListManagerComponent implements OnInit {
   }
 
   updateItem(item:any, changes:any) {
-    console.log('update', item )
     this.store.dispatch(changeCompletedStatus({id: item._id, completed: changes}));
-    
   }
 
+  updateTitleItem(item:any, changes:string) {
+    this.store.dispatch(changeTitle({id: item._id, title:changes }));
+  }
 }

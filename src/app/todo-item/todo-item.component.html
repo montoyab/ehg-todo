@@ -1,18 +1,22 @@
 <div class="todo-item">
-    
-    <input type="checkbox" class="form-check-input" (change)="completeItem($event)" >
-    
-    <span class="todo-title" [ngClass]="{'todo-complete': item.completed}">
-      {{ item.title }}
-    </span>
-    
-    <button class="btn btn-secondary m-1"
-    (click)="updateItem()">
+
+  <input type="checkbox" class="form-check-input" (change)="completeItem($event)">
+
+  <span class="todo-title" [ngClass]="{'todo-complete': item.completed}" *ngIf="!editText">
+    {{ item.title }}
+  </span>
+  <span class="todo-title-input" *ngIf="editText">
+    <input class="form-control" name="title{{item._id}}" required [(ngModel)]="title">
+    <button class="btn btn-sm btn-outline-secondary m-1" (click)="saveItem()">
+      Save
+    </button>
+  </span>
+
+  <button class="btn btn-sm btn-outline-secondary m-1" (click)="updateItem()">
     Update
-    </button>
-   
-    <button class="btn btn-danger m-1"
-      (click)="removeItem()">
-      remove
-    </button>
-  </div>
+  </button>
+
+  <button class="btn btn-sm btn-outline-danger m-1" (click)="removeItem()">
+    Remove
+  </button>
+</div>

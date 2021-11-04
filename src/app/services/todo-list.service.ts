@@ -17,8 +17,8 @@ export class TodoListService {
   private todoListSubject: Subject<TodoItem[]> = new Subject<TodoItem[]>();
 
   constructor(private storageService: StorageService,
-              private http: HttpClient,
-              private store: Store<State>) {
+    private http: HttpClient,
+    private store: Store<State>) {
     this.retrieveListFromDataBase();
     this.retrieveListFromStore();
   }
@@ -30,18 +30,16 @@ export class TodoListService {
   retrieveListFromDataBase() {
     this.http.get<TodoItem[]>('https://jsonplaceholder.typicode.com/todos').subscribe(
       response => {
-      this.todoListSubject.next(response);
-      
-      response.forEach(item =>{
-        this.addItem(item.title, item.completed || false);
-      })
-
+        this.todoListSubject.next(response);
+        response.forEach(item => {
+          this.addItem(item.title, item.completed || false);
+        })
       }
     );
   }
 
-  addItem(title: string, completed:boolean) {
-     this.store.dispatch(setNewItem({item: {_id: uuid(), title: title, completed: completed}})); 
+  addItem(title: string, completed: boolean) {
+    this.store.dispatch(setNewItem({ item: { _id: uuid(), title: title, completed: completed } }));
   }
 
   getTodoList() {

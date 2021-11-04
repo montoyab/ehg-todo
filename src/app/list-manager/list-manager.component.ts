@@ -22,7 +22,9 @@ export class ListManagerComponent implements OnInit {
     
     this.todoList = this.todoListService.getTodoList();
   }
-  
+
+ 
+
   addItem(title: string) {
      this.store.dispatch(setNewItem({item: {_id: uuid(), title: title, completed: false}}));
     

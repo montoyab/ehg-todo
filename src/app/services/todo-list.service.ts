@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store';
 import * as fromTodoListSelectors from '../store/todo-list/selectors';
+import { setNewItem } from 'src/app/store/todo-list/actions';
+import { v4 as uuid } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +29,19 @@ export class TodoListService {
 
   retrieveListFromDataBase() {
     this.http.get<TodoItem[]>('https://jsonplaceholder.typicode.com/todos').subscribe(
-      response => this.todoListSubject.next(response)
+      response => {
+      this.todoListSubject.next(response);
+      
+      response.forEach(item =>{
+        this.addItem(item.title, item.completed || false);
+      })
+
+      }
     );
+  }
+
+  addItem(title: string, completed:boolean) {
+     this.store.dispatch(setNewItem({item: {_id: uuid(), title: title, completed: completed}})); 
   }
 
   getTodoList() {

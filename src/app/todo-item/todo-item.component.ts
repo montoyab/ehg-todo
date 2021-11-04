@@ -16,7 +16,8 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  completeItem() {
+  completeItem(e:any) {
+    // console.log(e.target.checked);
     this.update.emit({
       item: this.item,
       changes: !this.item.completed

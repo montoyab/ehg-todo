@@ -9,6 +9,7 @@ import * as fromTodoListSelectors from '../store/todo-list/selectors';
 import { setNewItem } from 'src/app/store/todo-list/actions';
 import { v4 as uuid } from 'uuid';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,14 +29,18 @@ export class TodoListService {
   }
 
   retrieveListFromDataBase() {
-    this.http.get<TodoItem[]>('https://jsonplaceholder.typicode.com/todos').subscribe(
-      response => {
-        this.todoListSubject.next(response);
-        response.forEach(item => {
-          this.addItem(item.title, item.completed || false);
-        })
-      }
-    );
+  if(localStorage.length == 0){
+      this.http.get<TodoItem[]>('https://jsonplaceholder.typicode.com/todos').subscribe(
+        response => {
+          if(localStorage.length == 0){
+            this.todoListSubject.next(response);
+            response.forEach(item => {
+              this.addItem(item.title, item.completed || false);  
+            })
+          }
+        }
+      );
+   }
   }
 
   addItem(title: string, completed: boolean) {

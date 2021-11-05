@@ -16,7 +16,10 @@ export class ListManagerComponent implements OnInit {
   
   todoList!: Observable<TodoItem[]>;
 
-  constructor(private todoListService: TodoListService, private store: Store<State>) { }
+  constructor(private todoListService: TodoListService, private store: Store<State>) {
+    
+    
+   }
 
   ngOnInit(): void {
     this.todoList = this.todoListService.getTodoList();
@@ -26,12 +29,10 @@ export class ListManagerComponent implements OnInit {
 
   addItem(title: string) {
      this.store.dispatch(setNewItem({item: {_id: uuid(), title: title, completed: false}}));
-    
   }
 
   removeItem(item:any) {
      this.store.dispatch(deleteTodoItem({id: item._id}));
-    
   }
 
   updateItem(item:any, changes:any) {

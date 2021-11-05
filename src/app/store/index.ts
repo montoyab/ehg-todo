@@ -1,11 +1,14 @@
 import {
     ActionReducerMap,
-    MetaReducer
+    MetaReducer,
+    ActionReducer
   } from '@ngrx/store';
-  import { environment } from '../../environments/environment';
+
   import { TodoListState } from 'src/app/store/todo-list/reducers';
   import * as fromTodoListReducers from './todo-list/reducers';
   
+  import { localStorageSync } from 'ngrx-store-localstorage';
+
   export interface State {
     todoList: TodoListState,
   }
@@ -14,6 +17,9 @@ import {
     todoList: fromTodoListReducers.reducer
   };
   
-  
-  export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+  export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+    return localStorageSync({keys: ['todoList'], rehydrate: true})(reducer);
+  }
+   
+ export const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   

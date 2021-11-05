@@ -14,7 +14,7 @@ export class InputButtonUnitComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  title = 'Buy some milk for kids';
+  title = 'Buy pancakes for kids';
   
   submitValue(newTitleForm: NgForm) {
     if (newTitleForm.valid) {

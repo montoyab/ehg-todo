@@ -9,8 +9,9 @@ import { InputButtonUnitComponent } from './input-button-unit/input-button-unit.
 import { ListManagerComponent } from './list-manager/list-manager.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule  } from '@ngrx/store';
 import { metaReducers, reducers } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -27,12 +28,9 @@ import { metaReducers, reducers } from './store';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    })
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({})
   ],
   providers: [],
   bootstrap: [AppComponent]

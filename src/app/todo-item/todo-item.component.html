@@ -6,14 +6,16 @@
     {{ item.title }}
   </span>
   <span class="todo-title-input" *ngIf="editText">
-    <input class="form-control" name="title{{item._id}}" required [(ngModel)]="title">
-    <button class="btn btn-sm btn-outline-secondary m-1" (click)="saveItem()">
-      Save
-    </button>
+    <div class="input-group">
+      <input class="form-control" name="title{{item._id}}" required [(ngModel)]="title">
+      <div class="input-group-prepend">
+        <button class="btn btn-sm btn-outline-secondary m-1" (click)="saveItem()">Save</button>
+      </div>
+    </div>
   </span>
 
-  <button class="btn btn-sm btn-outline-secondary m-1" (click)="updateItem()">
-    Update
+  <button class="btn btn-sm btn-outline-secondary m-1" (click)="updateItem()" *ngIf="!editText">
+    Edit
   </button>
 
   <button class="btn btn-sm btn-outline-danger m-1" (click)="removeItem()">

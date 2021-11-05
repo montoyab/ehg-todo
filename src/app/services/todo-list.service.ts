@@ -29,18 +29,18 @@ export class TodoListService {
   }
 
   retrieveListFromDataBase() {
-  if(localStorage.length == 0){
+    if (localStorage.length == 0) {
       this.http.get<TodoItem[]>('https://jsonplaceholder.typicode.com/todos').subscribe(
         response => {
-          if(localStorage.length == 0){
-            this.todoListSubject.next(response);
-            response.forEach(item => {
-              this.addItem(item.title, item.completed || false);  
-            })
-          }
+
+          this.todoListSubject.next(response);
+          response.forEach(item => {
+            this.addItem(item.title, item.completed || false);
+          })
+
         }
       );
-   }
+    }
   }
 
   addItem(title: string, completed: boolean) {

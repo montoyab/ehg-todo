@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputButtonUnitComponent } from './input-button-unit/input-button-unit.component';
 import { ListManagerComponent } from './list-manager/list-manager.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-
 import { StoreModule  } from '@ngrx/store';
 import { metaReducers, reducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 import { StorageService } from './storage.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/store';
 import * as fromTodoListSelectors from '../store/todo-list/selectors';
@@ -14,8 +14,9 @@ import { v4 as uuid } from 'uuid';
   providedIn: 'root'
 })
 export class TodoListService {
-
-  private todoListSubject: Subject<TodoItem[]> = new Subject<TodoItem[]>();
+  
+  private todoListSubject: BehaviorSubject<TodoItem[]> = new BehaviorSubject<TodoItem[]>([]);
+  
 
   constructor(private storageService: StorageService,
     private http: HttpClient,

@@ -12,20 +12,18 @@ import { v4 as uuid } from 'uuid';
   templateUrl: './list-manager.component.html',
   styleUrls: ['./list-manager.component.css']
 })
+
 export class ListManagerComponent implements OnInit {
   
-  todoList!: Observable<TodoItem[]>;
-
+  todoList: Observable<TodoItem[]>;
+    
   constructor(private todoListService: TodoListService, private store: Store<State>) {
-    
-    
-   }
-
-  ngOnInit(): void {
-    this.todoList = this.todoListService.getTodoList();
+      this.todoList = this.todoListService.getTodoList();      
   }
 
- 
+  ngOnInit() {    
+    this.todoList = this.todoListService.getTodoList();
+  }
 
   addItem(title: string) {
      this.store.dispatch(setNewItem({item: {_id: uuid(), title: title, completed: false}}));
